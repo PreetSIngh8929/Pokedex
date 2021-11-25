@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{details?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="details">
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let sprite of details.images| slice:0:4;">
+        <img [src]="sprite" style="height: 250px" />
+      </ion-slide>
+    </ion-slides>
+    <div *ngFor="let c of details.types| slice:0:1;">
+      <ion-card
+        [style.background-color]="c.type.name==='fire' ? 'orange' :(c.type.name==='grass' ? '#00cc00' :(c.type.name==='water' ? 'rgb(0, 162, 255)':(c.type.name==='poison' ? 'rgba(187, 21, 187, 0.623)':(c.type.name==='electric' ? 'yellow':(c.type.name==='ground' ? '#D2B48C	':(c.type.name==='psychic' ? 'emerald':(c.type.name==='normal' ? '#a6a6a6':'pink')))))))"
+      >
+        <ion-card-header>
+          <ion-card-title class="ion-text-capitalize"
+            >#{{ details.id }} {{ details.name }}
+            <ion-chip
+              color="primary"
+              style="
+                font-size: 22px;
+                background-color: floralwhite;
+                font-weight: 500;
+              "
+              *ngFor="let t of details.types"
+            >
+              <ion-label>{{ t.type.name }}</ion-label>
+            </ion-chip>
+          </ion-card-title>
+
+          <ion-card-subtitle
+            class="ion-text-capitalize"
+            style="font-size: 25px; color: rgb(255, 255, 255)"
+            >{{ details.weight }} lbs</ion-card-subtitle
+          >
+          <ion-card-subtitle
+            class="ion-text-capitalize"
+            style="font-size: 25px; color: rgb(255, 255, 255)"
+            >{{ details.height }} inches</ion-card-subtitle
+          >
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list lines="full">
+            <ion-item>
+              <ion-label text-wrap
+                ><b>Abilities:</b>
+                <span
+                  *ngFor="let a of details.abilities; let isLast = last"
+                  class="ion-text-capitalize"
+                >
+                  {{ a.ability.name }}{{ !isLast ? ',' : '' }}
+                </span></ion-label
+              >
+            </ion-item>
+            <ion-item
+              *ngFor="let s of details.stats"
+              class="ion-text-capitalize"
+            >
+              <ion-label slot="start"><b>{{ s.stat.name }}:</b></ion-label>
+              <ion-label slot="end"> {{ s.base_stat }} </ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-button
+            color="light"
+            style="margin-top: 18px; font-size: 18px"
+            [routerLink]="details.name"
+            >{{details.name}}'s &nbsp;Moves</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

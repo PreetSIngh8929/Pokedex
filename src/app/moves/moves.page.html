@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/pokeIndex"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Moves</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="details">
+    <!-- <ion-card style="margin-bottom: 100px"> -->
+    <ion-title
+      class="ion-text-capitalize"
+      style="
+        margin-top: 20px;
+        text-align: center;
+        font-size: xx-large;
+        color: rgb(25, 129, 136);
+      "
+      >{{details.name}}</ion-title
+    >
+    <ion-card
+      style="background-color: rgb(243, 242, 230); width: 60%; margin-left: 20%"
+    >
+      <ion-row
+        style="margin: 20px; border-bottom: 1px solid brown"
+        *ngFor="let m of details.moves"
+      >
+        <ion-col size="9" class="ion-text-capitalize" style="font-size: 18px">
+          {{m.move.name}}
+        </ion-col>
+        <!-- <ion-col size="3">
+          <div class="ion-justify-self-end">
+            <ion-button
+              [routerLink]="m.move.name"
+              color="danger"
+              style="font-size: 12px; float: right; margin-right: 0px"
+              >Details</ion-button
+            >
+          </div>
+        </ion-col> -->
+      </ion-row>
+    </ion-card>
+    <!-- </ion-card> -->
+  </div>
+</ion-content>
